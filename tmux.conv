@@ -1,0 +1,52 @@
+# 1. Prefix z to zoom
+# 3. Prefix s to show sessions
+# 4. Prefix and hjklHJKL for moving and resizing 
+# 5. Prefix d to detach
+# tmux new -s fuu
+# tmux attach -t fuu
+# tmux ls
+
+# switch between sessions
+bind @ switch-client -p
+
+# change prefix
+set -g prefix C-a
+unbind C-b
+
+# set time delay
+set -s escape-time 1
+
+# Ensure that we can send the Ctrl-A to other apps
+bind C-a send-prefix
+
+# splitting panes
+bind | split-window -h
+bind - split-window -v
+
+# moving between panes
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+
+# set default terminal mode
+set -g default-terminal "screen-256color"
+set -sa terminal-overrides ',*256col*:Tc'
+
+# status line
+set -g status-style fg=white,bold,bg=black
+set -g status-left ''
+set -g status-right ''
+
+# panes
+setw -g pane-border-style fg=green,bg=black
+setw -g pane-active-border-style fg=white,bg=yellow
+setw -g window-style fg=colour240,bg=colour235
+setw -g window-active-style fg=white,bg=black
+
+# command / messageline
+set -g message-style fg=white,bold,bg=black
+
+# start tmux with vim at the top and two panes below
+#bind t send-keys 'vim' C-m \; splitw \; splitw -h 
+#bind K kill-session
