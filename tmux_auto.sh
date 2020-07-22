@@ -1,10 +1,3 @@
-#!/bin/bash
-
-# install tmux
-apt install tmux
-
-# Important commands:
-------------------------------------------
 # tmux new -s session_name 
 # tmux ls
 # tmux attach -t session_name
@@ -14,21 +7,20 @@ apt install tmux
 # Prefix c : create new window
 # prefix p : previous window
 # previx n: next window
+# prefix [ to enter scroll-mode and prefix q to exit
 
 # reload config file: source-file ~/.tmux.conf
 # .tmux.conf in ~/.tmux.conf
-
-touch ~/.tmux.conf
 
 # set prefix from C-b to C-a and unbind old prefix
 set -g prefix C-a
 unbind C-b
 
+# ensure that C-a ben be send to other aps:
+bind C-a send-prefix
+
 # delay between prefix and command
 set -s escape-time 1
-
-# ensure that C-a ben be send to other aps:
-# bind C-a send-prefix
 
 # splitting panes with | and -
 bind | split-window -h
@@ -45,9 +37,6 @@ bind -r H resize-pane -L 5
 bind -r J resize-pane -D 5
 bind -r K resize-pane -U 5
 bind -r L resize-pane -R 5
-
-# Visuals
-# tput colors: have 256 colors. Set tango theme?
 
 # set default terminal mode to 256 colors
 set -g default-terminal "screen-256color"
@@ -70,3 +59,6 @@ set -g message-style fg=white,bold,bg=black
 
 # center window list
 set -g status-justify centre
+
+# allow scrolling in panes
+set -g mouse on # set -g mode-mouse on for tmux < 2.1
